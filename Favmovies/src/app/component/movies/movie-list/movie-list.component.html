@@ -1,0 +1,41 @@
+<!-- For displaying error on the browser -->
+<h6 *ngIf="displayError" class="text-danger" align="right">{{errorMsg}}</h6>
+
+<!-- movie list  -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-6" *ngFor="let movie of movies">
+      <div class="card">
+        <app-movie [movie]="movie" (favArray)="setFavMovieList($event)" (err)="showError($event)" [flag]="flag">
+        </app-movie>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="{{movie.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Movie</h5>
+              <button type="button" #cl class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #form="ngForm">
+                 <input class="form-control" type="text" hidden name="id" [(ngModel)]="movie.id">
+                <input class="form-control mb-3" type="text" name="title" placeholder="Movie Title"
+                  [(ngModel)]="movie.title">
+                <textarea class="form-control mb-3" type="text" name="overview" placeholder="Overview" [(ngModel)]="movie.overview"></textarea>
+                <input class="form-control mb-3" type="text" name="Rating" placeholder="Rating" [(ngModel)]="movie.vote_average">
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" (click)="onSubmit(form.value)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
