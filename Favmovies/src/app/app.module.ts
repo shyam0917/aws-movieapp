@@ -12,6 +12,7 @@ import { MovieListComponent } from './component/movies/movie-list/movie-list.com
 import { MovieComponent } from './component/movies/movie-list/movie/movie.component';
 import { MovieSearchComponent } from './component/movies/movie-search/movie-search.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AppRoutingModule } from './/app-routing.module';
   FormsModule,
   ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
